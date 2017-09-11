@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 	public float levelStartDelay = 2f;
+	public float gameOverDelay = 2f;
 	public float turnDelay = .1f;
 	//单例模式
 	public static GameManager instance = null;
@@ -62,9 +63,14 @@ public class GameManager : MonoBehaviour {
 		levelImage.SetActive (false);
 		doingSetup = false;
 	}
+	private void EnableLevelImage()
+	{
+		levelImage.SetActive (true);
+	}
 	public void GameOver()
 	{
 		levelText.text = "After " + level + " days, you starved!";
+		Invoke ("EnableLevelImage", gameOverDelay);
 		enabled = false;
 	}
 
